@@ -1,9 +1,31 @@
 //Select
 $select-height: 3em !default;
+$select-margin-top: 0 !default;
+$select-margin-bottom: 0 !default;
+$select-margin-left: 0 !default;
+$select-margin-right: 0 !default;
+//Defined margins for each screens.
+$select-margin-for-screens: () !default;
+/*$select-margin-for-screens: (
+    s1: (
+        top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
+        bottom: 20px,
+        left: 20px,
+        right: 20px,
+    ),
+    ...
+) !default;*/
 $select-border: 1px solid get-color(grey, 400) !default;
 $select-focus-border-color: $primary-color !default;
+$select-background-color: transparent !default;
+$select-focus-background-color: transparent !default;
 $select-padding: 0 10px !default;
+$select-color: inherit !default;
+$select-focus-color: inherit !default;
+$select-border-radius: 0 !default;
+$select-transition: 'border-color #{$elements-transition-duration} #{$elements-transition-function}, background #{$elements-transition-duration} #{$elements-transition-function}, color #{$elements-transition-duration} #{$elements-transition-function}' !default;
 
+$select-disabled-border-color: get-color(grey, 400) !default;
 $select-disabled-background: get-color(grey, 100) !default;
 
 $select-arrow-color-rgb: '189, 189, 189' !default;

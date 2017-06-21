@@ -3,24 +3,42 @@ select {
     display: block;
     width: 100%;
     height: $select-height;
+    @include include-element-margin($select-margin-top, $select-margin-bottom, $select-margin-left, $select-margin-right, $select-margin-for-screens);
+    outline: 0;
     border: $select-border;
-    padding: $select-padding;
-    font: inherit;
-    text-transform: none;
-    color: inherit;
+    background-color: $select-background-color;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28#{$select-arrow-color-rgb}%29'></polygon></svg>");
     background-position: right 10px center;
     background-repeat: no-repeat;
+    padding: $select-padding;
+    font: inherit;
+    text-transform: none;
+    color: $select-color;
     @include background-size(auto 20%);
+    @include border-radius($select-border-radius);
+    @include box-shadow(none);
     @include appearance(none);
+    @include transition($select-transition);
+
+    &::-moz-focus-inner {
+        margin: 0;
+        outline: 0;
+        border: 0;
+        padding: 0;
+    }
+
     &::-ms-expand { display: none };
 
     &:focus {
+        background-color: $select-focus-background-color;
         border-color: $select-focus-border-color;
+        color: $select-focus-color;
     }
 
     &[disabled] {
+        cursor: default;
         background: $select-disabled-background;
+        border-color: $select-disabled-border-color;
     }
 
     optgroup {
