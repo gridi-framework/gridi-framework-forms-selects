@@ -39,6 +39,7 @@ select {
         cursor: default;
         background: $select-disabled-background;
         border-color: $select-disabled-border-color;
+        color: $select-disabled-color;
     }
 
     optgroup {

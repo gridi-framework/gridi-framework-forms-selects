@@ -27,6 +27,7 @@ $select-transition: 'border-color #{$elements-transition-duration} #{$elements-t
 
 $select-disabled-border-color: get-color(grey, 400) !default;
 $select-disabled-background: get-color(grey, 100) !default;
+$select-disabled-color: get-color(grey, 400) !default;
 
 $select-arrow-color-rgb: '189, 189, 189' !default;
 
