@@ -74,10 +74,5 @@ select {
     }
 }
 
-select[multiple] option:checked {
-    @include include-select-multiple-option-checked-background($select-multiple-option-checked-background);
-}
-
-select[multiple]:focus option:checked {
-    @include include-select-focus-multiple-option-checked-background($select-multiple-focus-option-checked-background);
-}
+@include select-multiple-option-checked-background((background: $select-multiple-option-checked-background));
+@include select-focus-multiple-option-checked-background((background: $select-multiple-focus-option-checked-background));
