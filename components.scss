@@ -59,7 +59,7 @@ select {
             padding: 0;
             text-align: left;
 
-            &:before {
+            &::before {
                 display: none;
             }
         }
