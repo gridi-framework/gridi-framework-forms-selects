@@ -1,26 +1,62 @@
 //Select
 select {
-    display: block;
-    width: 100%;
+    display: $select-display;
+    width: $select-width;
     height: $select-height;
-    @include include-element-margin($select-margin-top, $select-margin-bottom, $select-margin-left, $select-margin-right, $select-margin-for-screens);
-    outline: 0;
-    border: $select-border;
-    background-color: $select-background-color;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28#{$select-arrow-color-rgb}%29'></polygon></svg>");
-    background-position: right 10px center;
-    background-repeat: no-repeat;
-    padding: $select-padding;
+    @include margin-shorthand-with-screens-support((
+        top: $select-margin-top,
+        bottom: $select-margin-bottom,
+        left: $select-margin-left,
+        right: $select-margin-right
+    ), $select-margin-for-screens);
+    @include outline-shorthand((
+        width: $select-outline-width,
+        style: $select-outline-style,
+        color: $select-outline-color,
+        make-shorthand: true
+    ));
+    @include border-shorthand(map-merge((
+        border: (
+            width: $select-border-width,
+            style: $select-border-style,
+            color: $select-border-color,
+            make-shorthand: true
+        )
+    ), $select-borders));
+    @include background-shorthand((
+        image: $select-background-image,
+        position: $select-background-position,
+        repeat: $select-background-repeat,
+        color: $select-background-color,
+        attachment: $select-background-attachment,
+        make-shorthand: true
+    ));
+    @include background-size($select-background-size);
+    @include padding-shorthand((
+        top: $select-padding-top,
+        bottom: $select-padding-bottom,
+        left: $select-padding-left,
+        right: $select-padding-right
+    ));
     font: inherit;
     text-transform: none;
     color: $select-color;
-    @include background-size(auto 20%);
     @include border-radius($select-border-radius);
-    @include box-shadow(none);
-    @include appearance(none);
-    @include transition($select-transition);
+    @include box-shadow($select-box-shadow);
+    @include appearance($select-appearance);
+    @include transition-shorthand((
+        property: $select-transition-property,
+        duration: $select-transition-duration,
+        timing-function: $select-transition-timing-function,
+        delay: $select-transition-delay,
+        make-shorthand: true
+    ));
+    @if mixin-exists(select-extra-style) {
+        @include select-extra-style();
+    }
 
-    &::-moz-focus-inner {
+    &::-moz-focus-inner,
+    &::-moz-focus-outer {
         margin: 0;
         outline: 0;
         border: 0;
@@ -30,49 +66,133 @@ select {
     &::-ms-expand { display: none };
 
     &:focus {
-        background-color: $select-focus-background-color;
-        border-color: $select-focus-border-color;
+        @include outline-shorthand((
+            width: $select-focus-outline-width,
+            style: $select-focus-outline-style,
+            color: $select-focus-outline-color,
+            make-shorthand: true
+        ));
+        @include border-shorthand(map-merge((
+            border: (
+                width: $select-focus-border-width,
+                style: $select-focus-border-style,
+                color: $select-focus-border-color,
+                make-shorthand: $select-focus-border-make-shorthand
+            )
+        ), $select-focus-borders));
+        @include background-shorthand((
+            image: $select-focus-background-image,
+            position: $select-focus-background-position,
+            repeat: $select-focus-background-repeat,
+            color: $select-focus-background-color,
+            attachment: $select-focus-background-attachment,
+            make-shorthand: $select-focus-background-make-shorthand
+        ));
         color: $select-focus-color;
+        @if mixin-exists(select-focus-extra-style) {
+            @include select-focus-extra-style();
+        }
     }
 
     &[disabled] {
-        cursor: default;
-        background: $select-disabled-background;
-        border-color: $select-disabled-border-color;
+        cursor: $select-disabled-cursor;
+        @include border-shorthand(map-merge((
+            border: (
+                width: $select-disabled-border-width,
+                style: $select-disabled-border-style,
+                color: $select-disabled-border-color,
+                make-shorthand: $select-disabled-border-make-shorthand
+            )
+        ), $select-disabled-borders));
+        @include background-shorthand((
+            image: $select-disabled-background-image,
+            position: $select-disabled-background-position,
+            repeat: $select-disabled-background-repeat,
+            color: $select-disabled-background-color,
+            attachment: $select-disabled-background-attachment,
+            make-shorthand: $select-disabled-background-make-shorthand
+        ));
         color: $select-disabled-color;
+        @if mixin-exists(select-disabled-extra-style) {
+            @include select-disabled-extra-style();
+        }
     }
 
     optgroup {
         font: inherit;
-        font-weight: 600;
+        font-weight: $option-group-label-font-weight;
         color: inherit;
+        @if mixin-exists(select-option-group-extra-style) {
+            @include select-option-group-extra-style();
+        }
     }
 
     &[multiple] {
         height: auto;
         min-height: $select-height;
-        background: transparent;
-        padding: $select-multiple-padding;
+        @include background-shorthand((
+            image: $select-multiple-background-image,
+            position: $select-multiple-background-position,
+            repeat: $select-multiple-background-repeat,
+            color: $select-multiple-background-color,
+            attachment: $select-multiple-background-attachment,
+            make-shorthand: $select-multiple-background-make-shorthand
+        ));
+        @include padding-shorthand((
+            top: $select-multiple-padding-top,
+            bottom: $select-multiple-padding-bottom,
+            left: $select-multiple-padding-left,
+            right: $select-multiple-padding-right
+        ));
+        @if mixin-exists(select-multiple-extra-style) {
+            @include select-multiple-extra-style();
+        }
 
         option, optgroup {
             margin: 0;
+            border: 0;
             padding: 0;
             text-align: left;
-
-            &::before {
-                display: none;
-            }
         }
 
         option {
-            padding: $select-multiple-option-padding;
+            @include padding-shorthand((
+                top: $select-multiple-option-padding-top,
+                bottom: $select-multiple-option-padding-bottom,
+                left: $select-multiple-option-padding-left,
+                right: $select-multiple-option-padding-right
+            ));
+            @if mixin-exists(select-multiple-option-extra-style) {
+                @include select-multiple-option-extra-style();
+            }
 
             &:checked {
+                @include select-multiple-option-checked-background-color($select-multiple-option-checked-background);
                 color: $select-multiple-option-checked-color;
+                @if mixin-exists(select-multiple-option-checked-extra-style) {
+                    @include select-multiple-option-checked-extra-style();
+                }
+            }
+        }
+
+        &:focus {
+            @if mixin-exists(select-focus-multiple-extra-style) {
+                @include select-focus-multiple-extra-style();
+            }
+
+            option {
+                @if mixin-exists(select-focus-multiple-option-extra-style) {
+                    @include select-focus-multiple-option-extra-style();
+                }
+                
+                &:checked {
+                    @include select-multiple-option-checked-background-color($select-multiple-focus-option-checked-background);
+                    color: $select-multiple-focus-option-checked-color;
+                    @if mixin-exists(select-focus-multiple-option-checked-extra-style) {
+                        @include select-focus-multiple-option-checked-extra-style();
+                    }
+                }
             }
         }
     }
 }
-
-@include select-multiple-option-checked-background((background: $select-multiple-option-checked-background));
-@include select-focus-multiple-option-checked-background((background: $select-multiple-focus-option-checked-background));

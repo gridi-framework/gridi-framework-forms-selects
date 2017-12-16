@@ -1,126 +1,127 @@
-@mixin include-select-colors($colors-map) {
-    @if map-has-key($colors-map, border-color) and map-get($colors-map, border-color) {
-        border-color: map-get($colors-map, border-color);
-    }
-    @if map-has-key($colors-map, background) and map-get($colors-map, background) {
-        background: map-get($colors-map, background);
-    }
-    @if map-has-key($colors-map, color) and map-get($colors-map, color) {
-        color: map-get($colors-map, color);
-    }
+//Colors
+//Text inputs
+//@mixin select-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-focus-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-disabled-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-multiple-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-focus-multiple-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-multiple-option-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-focus-multiple-option-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-multiple-option-checked-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
+//@mixin select-focus-multiple-option-checked-extra-colors-propertys($colors-map) {} //Create this mixin before import module when you want add some special colors style for element
 
-    &:focus {
-        @if map-has-key($colors-map, focus-border-color) and map-get($colors-map, focus-border-color) {
-            border-color: map-get($colors-map, focus-border-color);
+@mixin select-colors-propertys($colors-map) {
+    @if is-map($colors-map) {
+        @include property-from-map($colors-map, outline-color);
+        @include property-from-map($colors-map, border-color);
+        @include property-from-map($colors-map, background-color);
+        @if map-has-key($colors-map, arrow-color) {
+            @include select-arrow-color(map-get($colors-map, arrow-color));
         }
-        @if map-has-key($colors-map, focus-background) and map-get($colors-map, focus-background) {
-            background: map-get($colors-map, focus-background);
+        @include property-from-map($colors-map, color);
+        @if mixin-exists(select-extra-colors-propertys) {
+            @include select-extra-colors-propertys($colors-map);
         }
-        @if map-has-key($colors-map, focus-color) and map-get($colors-map, focus-color) {
-            color: map-get($colors-map, focus-color);
+
+        &:focus {
+            @include property-from-map($colors-map, outline-color, focus-outline-color);
+            @include property-from-map($colors-map, border-color, focus-border-color);
+            @include property-from-map($colors-map, background-color, focus-background-color);
+            @include property-from-map($colors-map, color, focus-color);
+            @if mixin-exists(select-focus-extra-colors-propertys) {
+                @include select-focus-extra-colors-propertys($colors-map);
+            }
+        }
+
+        &[disabled] {
+            @include property-from-map($colors-map, border-color, disabled-border-color);
+            @include property-from-map($colors-map, background-color, disabled-background-color);
+            @if map-has-key($colors-map, disabled-arrow-color) {
+                @include select-arrow-color(map-get($colors-map, disabled-arrow-color));
+            }
+            @include property-from-map($colors-map, color, disabled-color);
+            @if mixin-exists(select-disabled-extra-colors-propertys) {
+                @include select-disabled-extra-colors-propertys($colors-map);
+            }
+        }
+
+        &[multiple] {
+            @include property-from-map($colors-map, background-color, multiple-background-color);
+            @if mixin-exists(select-multiple-extra-colors-propertys) {
+                @include select-multiple-extra-colors-propertys($colors-map);
+            }
+
+            option {
+                @if mixin-exists(select-multiple-option-extra-colors-propertys) {
+                    @include select-multiple-option-extra-colors-propertys($colors-map);
+                }
+
+                &:checked {
+                    @if map-has-key($colors-map, multiple-option-checked-background-color) {
+                        @include select-multiple-option-checked-background-color(map-get($colors-map, multiple-option-checked-background-color));
+                    }
+                    @include property-from-map($colors-map, color, multiple-option-checked-color);
+                    @if mixin-exists(select-multiple-option-checked-extra-colors-propertys) {
+                        @include select-multiple-option-checked-extra-colors-propertys($colors-map);
+                    }
+                }
+            }
+
+            &:focus {
+                @if mixin-exists(select-focus-multiple-extra-colors-propertys) {
+                    @include select-focus-multiple-extra-colors-propertys($colors-map);
+                }
+
+                option {
+                    @if mixin-exists(select-focus-multiple-option-extra-colors-propertys) {
+                        @include select-focus-multiple-option-extra-colors-propertys($colors-map);
+                    }
+
+                    &:checked {
+                        @if map-has-key($colors-map, focus-multiple-option-checked-background-color) {
+                            @include select-multiple-option-checked-background-color(map-get($colors-map, focus-multiple-option-checked-background-color));
+                        }
+                        @include property-from-map($colors-map, color, focus-multiple-option-checked-color);
+                        @if mixin-exists(select-focus-multiple-option-checked-extra-colors-propertys) {
+                            @include select-focus-multiple-option-checked-extra-colors-propertys($colors-map);
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 @mixin select-colors($colors-map) {
     select {
-        @include include-select-colors($colors-map);
+        @include select-colors-propertys($colors-map);
     }
 }
 
 @mixin class-select-colors($class, $colors-map) {
     select.#{$class} {
-        @include include-select-colors($colors-map);
+        @include select-colors-propertys($colors-map);
     }
 }
 
-//Arrow
-@mixin include-select-arrow-color-rgb($colors-map) {
-    @if map-has-key($colors-map, color-rgb) and map-get($colors-map, color-rgb) {
-        $rgb: map-get($colors-map, color-rgb);
-        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28#{$rgb}%29'></polygon></svg>");
-    }
+@mixin select-arrow-color($color) {
+    background-image: url(get-select-arrow-down-svg($color));
+}
 
-    @if map-has-key($colors-map, focus-color-rgb) and map-get($colors-map, focus-color-rgb) {
-        &:focus {
-            $rgb: map-get($colors-map, focus-color-rgb);
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28#{$rgb}%29'></polygon></svg>");
+@mixin select-multiple-option-checked-background-color($background-color) {
+    @if $select-multiple-option-checked-background-color-css3-use-prefixes {
+        @if index($select-multiple-option-checked-background-color-browsers-prefixes, webkit) {
+            background: $background-color -webkit-linear-gradient(0deg, $background-color 0%, $background-color 100%);
+        }
+        @if index($select-multiple-option-checked-background-color-browsers-prefixes, moz) {
+            background: $background-color -moz-linear-gradient(0deg, $background-color 0%, $background-color 100%);
+        }
+        @if index($select-multiple-option-checked-background-color-browsers-prefixes, ms) {
+            background: $background-color -ms-linear-gradient(0deg, $background-color 0%, $background-color 100%);
+        }
+        @if index($select-multiple-option-checked-background-color-browsers-prefixes, o) {
+            background: $background-color -o-linear-gradient(0deg, $background-color 0%, $background-color 100%);
         }
     }
-
-}
-@mixin select-arrow-color-rgb($colors-map) {
-    select {
-        @include include-select-arrow-color-rgb($colors-map);
-    }
-}
-
-@mixin class-select-arrow-color-rgb($class, $colors-map) {
-    select.#{$class} {
-        @include include-select-arrow-color-rgb($colors-map);
-    }
-}
-
-//Multiple
-@mixin select-multiple-option-checked-style() {
-    select[multiple] option:checked {
-        @content;
-    }
-}
-
-@mixin class-select-multiple-option-checked-style($class) {
-    select.#{$class}[multiple] option:checked {
-        @content;
-    }
-}
-
-@mixin include-select-multiple-option-checked-colors($colors-map) {
-    @if map-has-key($colors-map, background) and map-get($colors-map, background) {
-        $background: map-get($colors-map, background);
-        background: $background -webkit-linear-gradient(0deg, $background 0%, $background 100%);
-        background: $background -mz-linear-gradient(0deg, $background 0%, $background 100%);
-        background: $background -ms-linear-gradient(0deg, $background 0%, $background 100%);
-        background: $background -o-linear-gradient(0deg, $background 0%, $background 100%);
-        background: $background linear-gradient(0deg, $background 0%, $background 100%);
-    }
-    @if map-has-key($colors-map, color) and map-get($colors-map, color) {
-        color: map-get($colors-map, color);
-    }
-}
-
-@mixin select-multiple-option-checked-background($colors-map) {
-    @include select-multiple-option-checked-style() {
-        @include include-select-multiple-option-checked-colors($colors-map);
-    }
-}
-
-@mixin class-select-multiple-option-checked-background($class, $colors-map) {
-    @include class-select-multiple-option-checked-style($class) {
-        @include include-select-multiple-option-checked-colors($colors-map);
-    }
-}
-
-//Multiple Focus
-@mixin select-focus-multiple-option-checked-style() {
-    select[multiple]:focus option:checked {
-        @content;
-    }
-}
-
-@mixin class-select-focus-multiple-option-checked-style($class) {
-    select.#{$class}[multiple]:focus option:checked {
-        @content;
-    }
-}
-
-@mixin select-focus-multiple-option-checked-background($colors-map) {
-    @include select-focus-multiple-option-checked-style {
-        @include include-select-multiple-option-checked-colors($colors-map);
-    }
-}
-
-@mixin class-select-focus-multiple-option-checked-background($class, $colors-map) {
-    @include class-select-focus-multiple-option-checked-style($class) {
-        @include include-select-multiple-option-checked-colors($colors-map);
-    }
+    background: $background-color linear-gradient(0deg, $background-color 0%, $background-color 100%);
 }

@@ -1,0 +1,14 @@
+/**
+ * Retur arrow svg image
+ *
+ * @function
+ * @param {color-rgb} - color in hex format
+ * @return svg
+ */
+@function get-select-arrow-down-svg($color){
+    $red: red($color);
+    $green: green($color);
+    $blue: blue($color);
+    $color-rgb: '#{$red}, #{$green}, #{$blue}';
+    @return "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28#{$color-rgb}%29'></polygon></svg>";
+}

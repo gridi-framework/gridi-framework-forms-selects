@@ -1,39 +1,162 @@
 //Select
+$select-display: block !default;
+$select-width: 100% !default;
 $select-height: 3em !default;
-$select-margin-top: 0 !default;
-$select-margin-bottom: 0 !default;
-$select-margin-left: 0 !default;
-$select-margin-right: 0 !default;
-//Defined margins for each screens.
-$select-margin-for-screens: () !default;
-/*$select-margin-for-screens: (
-    s1: (
-        top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
-        bottom: 20px,
-        left: 20px,
-        right: 20px,
-    ),
-    ...
-) !default;*/
-$select-border: 1px solid get-color(grey, 400) !default;
-$select-focus-border-color: $primary-color !default;
-$select-background-color: transparent !default;
-$select-focus-background-color: transparent !default;
-$select-padding: 0 10px !default;
-$select-color: inherit !default;
-$select-focus-color: inherit !default;
-$select-border-radius: 0 !default;
-$select-transition: 'border-color #{$elements-transition-duration} #{$elements-transition-function}, background #{$elements-transition-duration} #{$elements-transition-function}, color #{$elements-transition-duration} #{$elements-transition-function}' !default;
 
+//Magins
+$select-margin-top: $form-item-elements-margin-top !default;
+$select-margin-bottom: $form-item-elements-margin-bottom !default;
+$select-margin-left: $form-item-elements-margin-left !default;
+$select-margin-right: $form-item-elements-margin-right !default;
+$select-margin-for-screens: $form-item-elements-margin-for-screens !default;
+
+//Outline
+$select-outline-width: 0 !default;
+$select-outline-style: null !default;
+$select-outline-color: null !default;
+
+//Borders
+$select-border-width: 1px !default;
+$select-border-style: solid !default;
+$select-border-color: get-color(grey, 400) !default;
+$select-borders: () !default;
+
+//Background
+$select-background-image: url(get-select-arrow-down-svg(get-color(grey, 400))) !default;
+$select-background-position: right 0.7em center !default;
+$select-background-repeat: no-repeat !default;
+$select-background-color: transparent !default;
+$select-background-attachment: null !default;
+$select-background-size: auto 20% !default;
+
+//Paddings
+$select-padding-top: 0 !default;
+$select-padding-bottom: 0 !default;
+$select-padding-left: 0.7rem !default;
+$select-padding-right: 0.7rem !default;
+
+//Color
+$select-color: inherit !default;
+
+//Border radius
+$select-border-radius: 0 !default;
+
+//Box shadow
+$select-box-shadow: none !default;
+
+//Appearance
+$select-appearance: none !default;
+
+//Transition
+$select-transition-property: (border-color, background, color) !default;
+$select-transition-duration: $elements-transition-duration !default;
+$select-transition-timing-function: $elements-transition-function !default;
+$select-transition-delay: null !default;
+
+//Extra style
+//@mixin select-extra-style() {} //Create this mixin before import module when you want add some special style for element
+
+//Focus
+//Outline
+$select-focus-outline-width: null !default;
+$select-focus-outline-style: null !default;
+$select-focus-outline-color: null !default;
+
+//Borders
+$select-focus-border-width: null !default;
+$select-focus-border-style: null !default;
+$select-focus-border-color: $primary-color !default;
+$select-focus-border-make-shorthand: false !default;
+$select-focus-borders: () !default;
+
+//Background
+$select-focus-background-image: null !default;
+$select-focus-background-position: null !default;
+$select-focus-background-repeat: null !default;
+$select-focus-background-color: transparent !default;
+$select-focus-background-attachment: null !default;
+$select-focus-background-make-shorthand: false !default;
+
+//Color
+$select-focus-color: inherit !default;
+
+//Extra style
+//@mixin select-focus-extra-style() {} //Create this mixin before import module when you want add some special style for element
+
+//Disabled
+//Cursor
+$select-disabled-cursor: default !default;
+
+//Borders
+$select-disabled-border-width: null !default;
+$select-disabled-border-style: null !default;
 $select-disabled-border-color: get-color(grey, 400) !default;
-$select-disabled-background: get-color(grey, 100) !default;
+$select-disabled-border-make-shorthand: false !default;
+$select-disabled-borders: () !default;
+
+//Background
+$select-disabled-background-image: null !default;
+$select-disabled-background-position: null !default;
+$select-disabled-background-repeat: null !default;
+$select-disabled-background-color: get-color(grey, 100) !default;
+$select-disabled-background-attachment: null !default;
+$select-disabled-background-make-shorthand: false !default;
+
+//Color
 $select-disabled-color: get-color(grey, 400) !default;
 
-$select-arrow-color-rgb: '189, 189, 189' !default;
+//Extra style
+//@mixin select-disabled-extra-style() {} //Create this mixin before import module when you want add some special style for element
+
+//Option group
+$option-group-label-font-weight: $bold-elements-font-weight !default;
+//Extra style
+//@mixin select-option-group-extra-style() {} //Create this mixin before import module when you want add some special style for element
 
 //Select multiple
-$select-multiple-padding: 10px !default;
-$select-multiple-option-padding: 10px !default;
+$select-multiple-background-image: null !default;
+$select-multiple-background-position: null !default;
+$select-multiple-background-repeat: null !default;
+$select-multiple-background-color: transparent !default;
+$select-multiple-background-attachment: null !default;
+$select-multiple-background-make-shorthand: true !default;
+
+//Paddings
+$select-multiple-padding-top: 0.7rem !default;
+$select-multiple-padding-bottom: 0.7rem !default;
+$select-multiple-padding-left: 0.7rem !default;
+$select-multiple-padding-right: 0.7rem !default;
+
+//Extra style
+//@mixin select-multiple-extra-style() {} //Create this mixin before import module when you want add some special style for element
+//@mixin select-focus-multiple-extra-style() {} //Create this mixin before import module when you want add some special style for element
+
+//Select multiple option
+//Paddings
+$select-multiple-option-padding-top: 0.7rem !default;
+$select-multiple-option-padding-bottom: 0.7rem !default;
+$select-multiple-option-padding-left: 0.7rem !default;
+$select-multiple-option-padding-right: 0.7rem !default;
+
+//Extra style
+//@mixin select-multiple-option-extra-style() {} //Create this mixin before import module when you want add some special style for element
+//@mixin select-focus-multiple-option-extra-style() {} //Create this mixin before import module when you want add some special style for element
+
+//Checked
+$select-multiple-option-checked-background-color-browsers-prefixes: webkit moz ms o !default;
+$select-multiple-option-checked-background-color-css3-use-prefixes: $css3-use-prefixes !default;
+
+//Background
 $select-multiple-option-checked-background: get-color(grey, 400) !default;
+$select-multiple-option-checked-color: get-color(white) !default;
+
+//Extra style
+//@mixin select-multiple-option-checked-extra-style() {} //Create this mixin before import module when you want add some special style for element
+
+//Focus
+//Background
 $select-multiple-focus-option-checked-background: $primary-color !default;
-$select-multiple-option-checked-color: $primary-color-background-inner-color !default;
+$select-multiple-focus-option-checked-color: $primary-color-background-inner-color !default;
+
+//Extra style
+//@mixin select-focus-multiple-option-checked-extra-style() {} //Create this mixin before import module when you want add some special style for element
