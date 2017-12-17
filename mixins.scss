@@ -105,7 +105,9 @@
 }
 
 @mixin select-arrow-color($color) {
-    background-image: url(get-select-arrow-down-svg($color));
+    @if $color {
+        background-image: url(get-select-arrow-down-svg($color));
+    }
 }
 
 @mixin select-multiple-option-checked-background-color($background-color) {
